@@ -59,7 +59,7 @@ class ResultController extends Controller
             ]);
         });
 
-        return response()->json($result, 201);
+        return response()->json(['result' => $result, 'score' => $score], 201);
     }
 
     public function show($id)
@@ -103,4 +103,3 @@ class ResultController extends Controller
         return response()->json(null, 204);
     }
 }
-

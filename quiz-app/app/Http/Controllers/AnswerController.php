@@ -16,16 +16,23 @@ class AnswerController extends Controller
     public function store(Request $request)
     {
         // Validazione della richiesta
-        $request->validate([
-            'question_id' => 'required|exists:questions,id',
-            'answer_text' => 'required|string',
-            'is_correct' => 'required|boolean',
-        ]);
+        // $request->validate([
+        //     'question_id' => 'required|exists:questions,id',
+        //     'answer_text' => 'required|string',
+        //     'is_correct' => 'required|boolean',
+        // ]);
+
+        $data = $request->all();
+        $new_answer = new Answer();
+        $new_answer->question_id = $data['question_id'];
+        $new_answer->answer_text = $data['answer_text'];
+        $new_answer->is_correct = $data['is_correct'];
+        $new_answer->save();
 
         // Creazione di una nuova risposta
-        $answer = Answer::create($request->all());
+        // $answer = Answer::create($request->all());
 
-        return response()->json($answer, 201);
+        // return response()->json($answer, 201);
     }
 
     public function show($id)
@@ -42,20 +49,28 @@ class AnswerController extends Controller
     public function update(Request $request, $id)
     {
         // Validazione della richiesta
-        $request->validate([
-            'answer_text' => 'required|string',
-            'is_correct' => 'required|boolean',
-        ]);
+        // $request->validate([
+        //     'answer_text' => 'required|string',
+        //     'is_correct' => 'required|boolean',
+        // ]);
+
+        $data = $request->all();
+        $answer = Answer::find($id);
+        $answer->question_id = $data['question_id'];
+        $answer->answer_text = $data['answer_text'];
+        $answer->is_correct = $data['is_correct'];
+        $answer->update();
 
         // Aggiornamento di una risposta esistente
-        $answer = Answer::find($id);
-        if (!$answer) {
-            return response()->json(['error' => 'Answer not found'], 404);
-        }
+        // $answer = Answer::find($id);
+        // if (!$answer) {
+        //     return response()->json(['error' => 'Answer not found'], 404);
+        // }
 
-        $answer->update($request->all());
+    //     $answer->update($request->all());
 
-        return response()->json($answer, 200);
+    //     return response()->json($answer, 200);
+    // 
     }
 
     public function destroy($id)

@@ -34,8 +34,8 @@ class QuizController extends Controller
 
     public function show($id)
     {
-        // Restituisce un quiz specifico
-        $quiz = Quiz::find($id);
+        // Carica il quiz con le domande e le risposte associate
+        $quiz = Quiz::with('questions.answers')->find($id);
         if (!$quiz) {
             return response()->json(['error' => 'Quiz not found'], 404);
         }
@@ -74,5 +74,3 @@ class QuizController extends Controller
         return response()->json(null, 204);
     }
 }
-
-

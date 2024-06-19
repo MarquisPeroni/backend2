@@ -7,3 +7,8 @@ Route::get('/', function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/csrf-token', function () {
+    return response()->json(['token' => csrf_token()]);
+});
