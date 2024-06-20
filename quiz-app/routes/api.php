@@ -44,10 +44,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/quizzes', [QuizController::class, 'index']);
     Route::get('/quizzes/{id}', [QuizController::class, 'show']);
     
-    
-    
 });
-
 // Rotte pubbliche
 
 

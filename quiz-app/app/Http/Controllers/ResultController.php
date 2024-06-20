@@ -15,7 +15,8 @@ class ResultController extends Controller
     public function index()
     {
         // Restituisce un elenco di tutti i risultati
-        return Result::all();
+        $results = Result::with('user', 'quiz')->get();
+        return response()->json($results);
     }
 
     public function store(Request $request)
