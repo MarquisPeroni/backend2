@@ -18,13 +18,13 @@ class ResultSeeder extends Seeder
             Result::create([
                 'user_id' => $user->id,
                 'quiz_id' => $quiz->id,
-                'score' => 8, // Esempio di punteggio
+                'score' => 8, 
             ]);
 
             Result::create([
                 'user_id' => $user->id,
                 'quiz_id' => $quiz->id,
-                'score' => 5, // Un altro esempio di punteggio
+                'score' => 5, 
             ]);
         }
     }

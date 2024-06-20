@@ -9,7 +9,7 @@ class Answer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['question_id', 'content', 'is_correct'];
+    protected $fillable = ['question_id', 'answer_text', 'is_correct'];
 
     // Una risposta appartiene a una domanda
     public function question()
