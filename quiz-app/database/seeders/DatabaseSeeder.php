@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             AnswerSeeder::class,
             ResultSeeder::class,
+            MetalGearSolid3QuizSeeder::class,
         ]);
     }
 }

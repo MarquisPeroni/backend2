@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -37,5 +38,21 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return response()->json(['user' => $user], 201);
+    }
+
+    /**
+     * Get the results for a specific user.
+     */
+    public function results(User $user)
+    {
+        $currentUser = Auth::user();
+        logger()->info('Current user ID: ' . $currentUser->id); // Log per verificare l'utente attualmente autenticato
+        logger()->info('Requested user ID: ' . $user->id); // Log per verificare l'utente richiesto
+
+        Gate::authorize('view', $user);
+        
+        $results = $user->results()->with('quiz')->get();
+
+        return response()->json($results);
     }
 }

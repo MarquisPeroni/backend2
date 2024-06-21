@@ -14,8 +14,9 @@ class ResultController extends Controller
 {
     public function index()
     {
-        // Restituisce un elenco di tutti i risultati
-        $results = Result::with('user', 'quiz')->get();
+        $results = Result::with('user', 'quiz')
+            ->orderBy('score', 'desc') 
+            ->paginate(10);
         return response()->json($results);
     }
 

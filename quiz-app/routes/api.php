@@ -6,6 +6,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 // Rotte protette da autenticazione
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -43,6 +44,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('/quizzes', [QuizController::class, 'index']);
     Route::get('/quizzes/{id}', [QuizController::class, 'show']);
+
+    Route::get('/users/{user}/results', [RegisteredUserController::class, 'results']);
     
 });
 // Rotte pubbliche
