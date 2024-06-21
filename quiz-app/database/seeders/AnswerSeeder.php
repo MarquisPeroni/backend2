@@ -65,20 +65,58 @@ class AnswerSeeder extends Seeder
                 ['answer_text' => 'Green Materia', 'is_correct' => false],
                 ['answer_text' => 'Yellow Materia', 'is_correct' => false],
             ],
+            // Nuove domande
+            'What is the name of Cloud\'s hometown?' => [
+                ['answer_text' => 'Nibelheim', 'is_correct' => true],
+                ['answer_text' => 'Midgar', 'is_correct' => false],
+                ['answer_text' => 'Junon', 'is_correct' => false],
+                ['answer_text' => 'Wutai', 'is_correct' => false],
+            ],
+            'Who is the leader of the Turks?' => [
+                ['answer_text' => 'Tseng', 'is_correct' => true],
+                ['answer_text' => 'Reno', 'is_correct' => false],
+                ['answer_text' => 'Rude', 'is_correct' => false],
+                ['answer_text' => 'Elena', 'is_correct' => false],
+            ],
+            'What is the name of the flower girl in the slums?' => [
+                ['answer_text' => 'Aerith', 'is_correct' => true],
+                ['answer_text' => 'Tifa', 'is_correct' => false],
+                ['answer_text' => 'Yuffie', 'is_correct' => false],
+                ['answer_text' => 'Rinoa', 'is_correct' => false],
+            ],
+            'What is the name of Sephiroth\'s sword?' => [
+                ['answer_text' => 'Masamune', 'is_correct' => true],
+                ['answer_text' => 'Muramasa', 'is_correct' => false],
+                ['answer_text' => 'Excalibur', 'is_correct' => false],
+                ['answer_text' => 'Ragnarok', 'is_correct' => false],
+            ],
+            'True or False: The Gold Saucer is a massive casino and amusement park.' => [
+                ['answer_text' => 'True', 'is_correct' => true],
+                ['answer_text' => 'False', 'is_correct' => false],
+            ],
+            'True or False: Red XIII\'s real name is Nanaki.' => [
+                ['answer_text' => 'True', 'is_correct' => true],
+                ['answer_text' => 'False', 'is_correct' => false],
+            ],
+            'True or False: Cid Highwind is the first character to join Cloud\'s party.' => [
+                ['answer_text' => 'True', 'is_correct' => false],
+                ['answer_text' => 'False', 'is_correct' => true],
+            ],
         ];
 
         foreach ($questions as $questionText => $answers) {
-            $question = Question::where('question_text', $questionText)->first();
-            if ($question) {
-                foreach ($answers as $answer) {
-                    Answer::create([
-                        'question_id' => $question->id,
-                        'answer_text' => $answer['answer_text'],
-                        'is_correct' => $answer['is_correct'],
-                    ]);
-                }
+            $question = Question::firstOrCreate([
+                'quiz_id' => 1, 
+                'question_text' => $questionText,
+            ]);
+
+            foreach ($answers as $answer) {
+                Answer::firstOrCreate([
+                    'question_id' => $question->id,
+                    'answer_text' => $answer['answer_text'],
+                    'is_correct' => $answer['is_correct'],
+                ]);
             }
         }
     }
 }
-

@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             AnswerSeeder::class,
             ResultSeeder::class,
             MetalGearSolid3QuizSeeder::class,
+            EldenRingQuizSeeder::class,
+            HollowKnightQuizSeeder::class,
+            PokemonGoldSilverQuizSeeder::class,
         ]);
     }
 }

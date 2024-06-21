@@ -11,8 +11,8 @@ class MetalGearSolid3QuizSeeder extends Seeder
 {
     public function run()
     {
-        // Creare il quiz
-        $quiz = Quiz::create([
+        // Creare il quiz se non esiste
+        $quiz = Quiz::firstOrCreate([
             'title' => 'Metal Gear Solid 3 Quiz',
             'description' => 'Test your knowledge about Metal Gear Solid 3.',
             'created_by' => 1 // Assicurati che questo ID utente esista
@@ -80,16 +80,58 @@ class MetalGearSolid3QuizSeeder extends Seeder
                 ['answer_text' => 'Operation Virtuous', 'is_correct' => false],
                 ['answer_text' => 'Operation End', 'is_correct' => false],
             ],
+            // Nuove domande
+            'What is the name of the unit led by Major Zero?' => [
+                ['answer_text' => 'FOX', 'is_correct' => true],
+                ['answer_text' => 'XOF', 'is_correct' => false],
+                ['answer_text' => 'Cobra Unit', 'is_correct' => false],
+                ['answer_text' => 'GRU', 'is_correct' => false],
+            ],
+            'What is the name of the river where Naked Snake confronts The Sorrow?' => [
+                ['answer_text' => 'The River of Sorrow', 'is_correct' => false],
+                ['answer_text' => 'The River of Pain', 'is_correct' => false],
+                ['answer_text' => 'The River of Grief', 'is_correct' => true],
+                ['answer_text' => 'The River of Endurance', 'is_correct' => false],
+            ],
+            'Who is the scientist that Naked Snake must rescue during the mission?' => [
+                ['answer_text' => 'Sokolov', 'is_correct' => true],
+                ['answer_text' => 'Granin', 'is_correct' => false],
+                ['answer_text' => 'Rasputin', 'is_correct' => false],
+                ['answer_text' => 'Raikov', 'is_correct' => false],
+            ],
+            'What is the name of the radar system used to detect enemies?' => [
+                ['answer_text' => 'Sonar', 'is_correct' => false],
+                ['answer_text' => 'Motion Detector', 'is_correct' => false],
+                ['answer_text' => 'Active Sonar', 'is_correct' => true],
+                ['answer_text' => 'Passive Radar', 'is_correct' => false],
+            ],
+            'True or False: EVA is an undercover agent from China.' => [
+                ['answer_text' => 'True', 'is_correct' => true],
+                ['answer_text' => 'False', 'is_correct' => false],
+            ],
+            'True or False: The Boss defected to the Soviet Union during the Cold War.' => [
+                ['answer_text' => 'True', 'is_correct' => true],
+                ['answer_text' => 'False', 'is_correct' => false],
+            ],
+            'True or False: Naked Snake is later known as Solid Snake.' => [
+                ['answer_text' => 'True', 'is_correct' => false],
+                ['answer_text' => 'False', 'is_correct' => true],
+            ],
         ];
 
-        foreach ($questions as $questionText => $answers) {
-            $question = Question::create([
+        $selectedQuestions = array_slice($questions, 0, 14); // Prende le prime 14 domande
+        $trueFalseQuestions = array_slice($questions, -6); // Prende le ultime 6 domande vero/falso
+
+        $finalQuestions = array_merge($selectedQuestions, $trueFalseQuestions);
+
+        foreach ($finalQuestions as $questionText => $answers) {
+            $question = Question::firstOrCreate([
                 'quiz_id' => $quiz->id,
                 'question_text' => $questionText,
             ]);
 
             foreach ($answers as $answer) {
-                Answer::create([
+                Answer::firstOrCreate([
                     'question_id' => $question->id,
                     'answer_text' => $answer['answer_text'],
                     'is_correct' => $answer['is_correct'],
