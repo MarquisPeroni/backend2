@@ -11,14 +11,12 @@ class HollowKnightQuizSeeder extends Seeder
 {
     public function run()
     {
-        // Creare il quiz se non esiste
         $quiz = Quiz::firstOrCreate([
             'title' => 'Hollow Knight Quiz',
             'description' => 'Test your knowledge about Hollow Knight.',
-            'created_by' => 1 // Assicurati che questo ID utente esista
+            'created_by' => 1 
         ]);
 
-        // Creare le domande e le risposte
         $questions = [
             'Who is the main protagonist in Hollow Knight?' => [
                 ['answer_text' => 'The Knight', 'is_correct' => true],

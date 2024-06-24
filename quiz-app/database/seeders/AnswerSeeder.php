@@ -65,7 +65,6 @@ class AnswerSeeder extends Seeder
                 ['answer_text' => 'Green Materia', 'is_correct' => false],
                 ['answer_text' => 'Yellow Materia', 'is_correct' => false],
             ],
-            // Nuove domande
             'What is the name of Cloud\'s hometown?' => [
                 ['answer_text' => 'Nibelheim', 'is_correct' => true],
                 ['answer_text' => 'Midgar', 'is_correct' => false],

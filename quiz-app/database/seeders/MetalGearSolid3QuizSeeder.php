@@ -11,14 +11,12 @@ class MetalGearSolid3QuizSeeder extends Seeder
 {
     public function run()
     {
-        // Creare il quiz se non esiste
         $quiz = Quiz::firstOrCreate([
             'title' => 'Metal Gear Solid 3 Quiz',
             'description' => 'Test your knowledge about Metal Gear Solid 3.',
-            'created_by' => 1 // Assicurati che questo ID utente esista
+            'created_by' => 1 
         ]);
 
-        // Creare le domande e le risposte
         $questions = [
             'Who is the main protagonist of Metal Gear Solid 3?' => [
                 ['answer_text' => 'Naked Snake', 'is_correct' => true],
@@ -80,7 +78,6 @@ class MetalGearSolid3QuizSeeder extends Seeder
                 ['answer_text' => 'Operation Virtuous', 'is_correct' => false],
                 ['answer_text' => 'Operation End', 'is_correct' => false],
             ],
-            // Nuove domande
             'What is the name of the unit led by Major Zero?' => [
                 ['answer_text' => 'FOX', 'is_correct' => true],
                 ['answer_text' => 'XOF', 'is_correct' => false],
@@ -119,8 +116,8 @@ class MetalGearSolid3QuizSeeder extends Seeder
             ],
         ];
 
-        $selectedQuestions = array_slice($questions, 0, 14); // Prende le prime 14 domande
-        $trueFalseQuestions = array_slice($questions, -6); // Prende le ultime 6 domande vero/falso
+        $selectedQuestions = array_slice($questions, 0, 14); 
+        $trueFalseQuestions = array_slice($questions, -6); 
 
         $finalQuestions = array_merge($selectedQuestions, $trueFalseQuestions);
 
